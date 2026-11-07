@@ -1,0 +1,9 @@
+{
+  "extends": "@pilaris/config/tsconfig/library",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "types": []
+  },
+  "include": ["src"]
+}

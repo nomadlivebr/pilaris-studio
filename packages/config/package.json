@@ -1,0 +1,28 @@
+{
+  "name": "@pilaris/config",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Configurações compartilhadas de TypeScript, ESLint e Prettier",
+  "type": "module",
+  "exports": {
+    "./tsconfig/base": "./tsconfig/base.json",
+    "./tsconfig/library": "./tsconfig/library.json",
+    "./tsconfig/react": "./tsconfig/react.json",
+    "./eslint/base": "./eslint/base.js",
+    "./eslint/react": "./eslint/react.js",
+    "./eslint/node": "./eslint/node.js",
+    "./prettier": "./prettier/index.js"
+  },
+  "dependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.7",
+    "globals": "^17.13.0",
+    "typescript-eslint": "^8.72.1"
+  },
+  "peerDependencies": {
+    "eslint": "^10.0.0",
+    "prettier": "^3.0.0"
+  }
+}

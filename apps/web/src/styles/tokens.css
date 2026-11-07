@@ -1,0 +1,95 @@
+/*
+ * Pilaris Studio — tokens visuais (fonte central do painel web).
+ *
+ * 1. Paleta da marca (--pilaris-*): valores oficiais, iguais a
+ *    packages/shared/src/brand/colors.ts.
+ * 2. Tokens semânticos (--background, --primary...): consumidos pelo
+ *    Tailwind e pelos componentes shadcn/ui. Componentes nunca usam hex direto.
+ */
+
+:root {
+  /* 1. Paleta da marca */
+  --pilaris-navy: #061b36;
+  --pilaris-deep-blue: #0b2945;
+  --pilaris-turquoise: #00d5c5;
+  --pilaris-secondary-blue: #087fad;
+  --pilaris-sand: #f7f5ef;
+  --pilaris-white: #ffffff;
+  --pilaris-ink: #172536;
+  --pilaris-slate: #718096;
+  --pilaris-mobile-surface: #f8f9fa;
+  --pilaris-gradient: linear-gradient(
+    135deg,
+    var(--pilaris-secondary-blue),
+    var(--pilaris-turquoise)
+  );
+
+  /* 2. Tokens semânticos — tema claro */
+  --background: var(--pilaris-sand);
+  --foreground: var(--pilaris-ink);
+  --card: var(--pilaris-white);
+  --card-foreground: var(--pilaris-ink);
+  --popover: var(--pilaris-white);
+  --popover-foreground: var(--pilaris-ink);
+  --primary: var(--pilaris-deep-blue);
+  --primary-foreground: var(--pilaris-white);
+  --secondary: #ebe8df;
+  --secondary-foreground: var(--pilaris-ink);
+  --muted: #efece4;
+  --muted-foreground: var(--pilaris-slate);
+  --accent: var(--pilaris-turquoise);
+  --accent-foreground: var(--pilaris-navy);
+  --destructive: #c53030;
+  --success: #0f9f8f;
+  --border: #e2ded3;
+  --input: #d9d4c7;
+  --ring: var(--pilaris-secondary-blue);
+
+  /* Raio discreto: evita aparência excessivamente arredondada */
+  --radius: 0.375rem;
+
+  /* Superfícies de marca (áreas escuras como o hero) */
+  --surface-brand: var(--pilaris-navy);
+  --surface-brand-raised: var(--pilaris-deep-blue);
+  --surface-brand-foreground: var(--pilaris-white);
+  --surface-brand-muted: #9fb3c8;
+
+  /* Gráficos (fases futuras) */
+  --chart-1: var(--pilaris-deep-blue);
+  --chart-2: var(--pilaris-secondary-blue);
+  --chart-3: var(--pilaris-turquoise);
+  --chart-4: var(--pilaris-slate);
+  --chart-5: #b9c4d0;
+
+  --sidebar: var(--pilaris-navy);
+  --sidebar-foreground: var(--pilaris-white);
+  --sidebar-primary: var(--pilaris-turquoise);
+  --sidebar-primary-foreground: var(--pilaris-navy);
+  --sidebar-accent: var(--pilaris-deep-blue);
+  --sidebar-accent-foreground: var(--pilaris-white);
+  --sidebar-border: rgb(255 255 255 / 0.08);
+  --sidebar-ring: var(--pilaris-turquoise);
+}
+
+/* Tema escuro (preparado para o painel; ativado pela classe .dark no <html>) */
+.dark {
+  --background: var(--pilaris-navy);
+  --foreground: #e6edf5;
+  --card: var(--pilaris-deep-blue);
+  --card-foreground: #e6edf5;
+  --popover: var(--pilaris-deep-blue);
+  --popover-foreground: #e6edf5;
+  --primary: var(--pilaris-turquoise);
+  --primary-foreground: var(--pilaris-navy);
+  --secondary: #12355a;
+  --secondary-foreground: #e6edf5;
+  --muted: #10304f;
+  --muted-foreground: #9fb3c8;
+  --accent: var(--pilaris-turquoise);
+  --accent-foreground: var(--pilaris-navy);
+  --destructive: #f56565;
+  --success: var(--pilaris-turquoise);
+  --border: rgb(255 255 255 / 0.1);
+  --input: rgb(255 255 255 / 0.14);
+  --ring: var(--pilaris-turquoise);
+}

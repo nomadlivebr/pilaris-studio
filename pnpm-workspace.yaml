@@ -1,0 +1,31 @@
+packages:
+  - apps/*
+  - server/api
+  - server/services
+  - server/integrations/*
+  - packages/*
+  - database
+# Pacotes autorizados a executar scripts de instalação (pnpm bloqueia por padrão).
+allowBuilds:
+  '@prisma/engines': true
+  '@scarf/scarf': false # telemetria
+  esbuild: true
+  prisma: true
+# Versões recentes liberadas da quarentena de publicação (minimumReleaseAge).
+minimumReleaseAgeExclude:
+  - '@expo/cli@58.1.18'
+  - '@expo/config@58.0.10'
+  - '@expo/fingerprint@0.21.8'
+  - '@expo/local-build-cache-provider@58.0.10'
+  - '@expo/log-box@58.0.14'
+  - '@expo/metro-config@58.0.20'
+  - '@expo/metro-runtime@58.0.16'
+  - '@expo/prebuild-config@58.0.18'
+  - '@expo/router-server@58.0.20'
+  - '@expo/schema-utils@58.0.3'
+  - '@expo/ui@58.0.26'
+  - babel-preset-expo@58.0.23
+  - eslint@10.14.0
+  - expo-modules-core@58.0.29
+  - expo-router@58.0.29
+  - expo@58.0.22

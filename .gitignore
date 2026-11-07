@@ -1,0 +1,47 @@
+﻿# Dependências
+node_modules/
+.pnpm-store/
+
+# Builds
+dist/
+build/
+*.tsbuildinfo
+database/src/generated/
+
+# Variáveis de ambiente — NUNCA versionar
+.env
+.env.*
+!.env.example
+
+# Turborepo
+.turbo/
+
+# Expo / React Native
+.expo/
+expo-env.d.ts
+web-build/
+apps/mobile/ios/
+apps/mobile/android/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.keystore
+credentials.json
+
+# Testes
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Sistema / editores
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+**/.vscode/*
+!**/.vscode/extensions.json

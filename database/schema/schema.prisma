@@ -1,0 +1,114 @@
+// =============================================================================
+// Pilaris Studio — schema do banco de dados (PostgreSQL)
+//
+// Multi-tenant: cada estúdio é um tenant. Toda entidade de negócio criada nas
+// próximas fases (alunos, professores, planos, aulas, agendamentos, presenças,
+// pagamentos, despesas, notificações...) DEVE possuir `studioId` com índice e
+// relação com `Studio`. Alterações somente via migrations (`pnpm db:migrate`).
+//
+// Convenções: models em PascalCase (inglês), tabelas/colunas em snake_case,
+// chaves primárias UUID v7 (ordenáveis por tempo).
+// =============================================================================
+
+generator client {
+  provider            = "prisma-client"
+  output              = "../src/generated/prisma"
+  moduleFormat        = "esm"
+  importFileExtension = "js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum StudioStatus {
+  ACTIVE
+  SUSPENDED
+
+  @@map("studio_status")
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+
+  @@map("user_status")
+}
+
+/// Perfis de acesso. Manter igual a packages/shared/src/auth/user-role.ts
+enum UserRole {
+  OWNER
+  ADMIN
+  INSTRUCTOR
+  RECEPTIONIST
+  STUDENT
+
+  @@map("user_role")
+}
+
+/// Tenant: um estúdio de Pilates.
+model Studio {
+  id        String       @id @default(uuid(7)) @db.Uuid
+  name      String
+  /// Identificador amigável e único (ex.: usado em URLs e subdomínios).
+  slug      String       @unique
+  status    StudioStatus @default(ACTIVE)
+  createdAt DateTime     @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime     @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  settings    StudioSettings?
+  memberships StudioMembership[]
+
+  @@map("studios")
+}
+
+/// Configurações gerais de cada estúdio (1:1).
+model StudioSettings {
+  id        String   @id @default(uuid(7)) @db.Uuid
+  studioId  String   @unique @map("studio_id") @db.Uuid
+  timezone  String   @default("America/Sao_Paulo")
+  locale    String   @default("pt-BR")
+  currency  String   @default("BRL") @db.Char(3)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  studio Studio @relation(fields: [studioId], references: [id], onDelete: Cascade)
+
+  @@map("studio_settings")
+}
+
+/// Identidade global de uma pessoa que acessa o sistema.
+/// O vínculo com cada estúdio (e o perfil) fica em StudioMembership.
+model User {
+  id           String     @id @default(uuid(7)) @db.Uuid
+  /// Sempre armazenado em minúsculas.
+  email        String     @unique
+  name         String
+  /// Preenchido na Fase 2 (autenticação JWT + refresh token).
+  passwordHash String?    @map("password_hash")
+  status       UserStatus @default(ACTIVE)
+  lastLoginAt  DateTime?  @map("last_login_at") @db.Timestamptz(3)
+  createdAt    DateTime   @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt    DateTime   @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  memberships StudioMembership[]
+
+  @@map("users")
+}
+
+/// Vínculo usuário ↔ estúdio com o perfil de acesso naquele estúdio.
+model StudioMembership {
+  id        String   @id @default(uuid(7)) @db.Uuid
+  studioId  String   @map("studio_id") @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  role      UserRole
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  studio Studio @relation(fields: [studioId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([studioId, userId])
+  @@index([userId])
+  @@map("studio_memberships")
+}

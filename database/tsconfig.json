@@ -1,0 +1,9 @@
+{
+  "extends": "@pilaris/config/tsconfig/library",
+  "compilerOptions": {
+    "rootDir": ".",
+    "noEmit": true,
+    "verbatimModuleSyntax": false
+  },
+  "include": ["src", "seeds", "prisma.config.ts"]
+}

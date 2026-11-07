@@ -1,0 +1,30 @@
+{
+  "id": "/",
+  "name": "Pilaris Studio",
+  "short_name": "Pilaris",
+  "description": "Gestão completa para estúdios de Pilates: agenda, alunos e financeiro.",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#061B36",
+  "theme_color": "#087FAD",
+  "categories": ["business", "health", "productivity"],
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    {
+      "src": "/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    { "name": "Agenda", "url": "/agenda?source=shortcut" },
+    { "name": "Alunos", "url": "/alunos?source=shortcut" },
+    { "name": "Financeiro", "url": "/financeiro?source=shortcut" }
+  ]
+}
